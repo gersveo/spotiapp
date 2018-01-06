@@ -1,3 +1,43 @@
-<p>
-  {{ artista.name }}
-</p>
+
+<div class="container top30">
+  <div class="row">
+    <div class="col-md-3 thumbnail">
+      <img [src]="artista.images | sinfoto" class="img-thumbnail img-circle">
+    </div>
+    <div class="col-md-9">
+      <h1>{{ artista.name }}</h1>
+      <hr />
+      <button [routerLink]="['/search']" class="btn btn-outline-success" type="button">Volver Atrás</button>
+      <a [href]="artista.external_urls?.spotify" target="_blank" class="btn btn-outline-danger" >Ir a Spotify</a>
+    </div>
+  </div>
+
+  <table class="table table-dark top30">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Foto</th>
+        <th>Nombre</th>
+        <th>Popularidad</th>
+        <th>Escuchar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let track of tracks; let i = index">
+        <td>{{ i+1 }}</td>
+        <td><img [src]=" track.album.images | sinfoto" class="img-thumbnail"></td>
+        <td>{{ track.name }}</td>
+        <td>{{ track.popularity }}%</td>
+        <td>
+          
+          <iframe [src]=" track.uri | domseguro:'https://open.spotify.com/embed?uri=' " width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>
